@@ -1,25 +1,10 @@
-# ReduxSimpleStarter
+# Redux (Udemy Stephen Grider)
 
-Interested in learning [Redux](https://www.udemy.com/react-redux/)?
+**Redux** is the data contained in the application 
+**React** is the views contained in the application 
 
-### Getting Started
+**Difference with other libraries like Angular, Backbone and Flux ** 
+Redux: centralized data in a single object referred to as the **state** (application level state containing all the data of the application)
+Other libraries has several collections. e.g. Backbone has collections and Flux has different stores. 
 
-There are two methods for getting started with this repo.
-
-#### Familiar with Git?
-Checkout this repo, install dependencies, then start the gulp process with the following:
-
-```
-> git clone https://github.com/StephenGrider/ReduxSimpleStarter.git
-> cd ReduxSimpleStarter
-> npm install
-> npm start
-```
-
-#### Not Familiar with Git?
-Click [here](https://github.com/StephenGrider/ReactStarter/releases) then download the .zip file.  Extract the contents of the zip file, then open your terminal, change to the project directory, and:
-
-```
-> npm install
-> npm start
-```
+_______________________________________________
