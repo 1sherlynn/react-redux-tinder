@@ -104,13 +104,13 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(BookList); 
 // connect(function)(component) and it produces a container, which is aware of the state contained by redux 
 ```
-- function mapStateToProps(state)
-// this function is the glue between react and redux 
-// takes in the application state as an arguement 
-// whatever gets returned from here will show up as props inside of BookList container above 
+#### function mapStateToProps(state)
+- this function is the glue between react and redux 
+-  takes in the application state as an arguement 
+-  whatever gets returned from here will show up as props inside of BookList container above 
 
-- export default connect(mapStateToProps)(BookList)
-// connect(function)(component) and it produces a container, which is aware of the state contained by redux 
+#### export default connect(mapStateToProps)(BookList)
+- connect(function)(component) and it produces a container, which is aware of the state contained by redux 
 
 
 - whenever our app state changes, the container(BookList) will **automatically re-render**
@@ -142,13 +142,52 @@ export default rootReducer;
 
 - by doing the above, it add a key-value (books: BooksReducer) to our global application state whereby the key is **books** and the value is our BooksReducer which is in this case our array of books
 - book-list.js started off as a component but we decided it needs to be aware of state and hence it was promoted to a container by 
-1) import { connect } from 'react-redux';
+1) import { connect } from 'react-redux'
+```javascript
+import { connect } from 'react-redux';
+```
 2) define function mapStateToProps(state)
+```javascript
+function mapStateToProps(state) 
+```
 3) hook our component to (mapStateToProps) function using: 
+```javascript
+export default connect(mapStateToProps)(BookList)
+```
+_______________________________________________
+
+### Actions and Action Creators
+
+- Currently the BooksReducer returns the same array (no ability to change the state overtime)
+- We need to allow state to be dynamic and changeable: this is what **actions & action creators** are for 
+
+#### Lifecycle of an Action in a Redux applcation 
+1) User clicks a button: calls an action creator 
+2) Action Creator is a function that returns an action object (has a type and payload) 
+3) That Action is automatically sent to all reducers 
+- switch statement based on action type
+- if type matches, reducer returns new value of state 
+4) All reducers process the action and returns a new state (or not). 
+5) New state is assembled and notifies containers of the changes to state.  
+6) On notification, container will re-render with new props 
+7) Process repeats
 
 _______________________________________________
 
-### Containers and Reducers Review
+### Binding Action Creators 
+
+
+- Define and create Action Creator in **src/actions/index.js**:
+
+```javascript
+function selectBook(book) {
+	console.log('A book has been selected:', book.title); 
+}
+```
+
+
+
+
 
 
 
