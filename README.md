@@ -269,16 +269,18 @@ export default function(state = null, action) {
 }
 ```
 
-- In the above, if the action has a type matching 'BOOK_SELECTED', return action.payload (book), 
-- If the action is anything else, return the current state
-- 'State' argument is not application state, it refers only to the state that this reducer is responsible for 
-
-- All reducers get 2 arguments: state and action 
+- In the above, if the action has a **type matching** 'BOOK_SELECTED', return action.payload (book), 
+- Else, return the current state
+- 'State' argument is **not** APPLICATION state, it refers only to the state that **this reducer** is responsible for 
+- All reducers get 2 arguments: **state** and **action** 
+```javascript
+export default function(state = null, action) {
+}
+```
 - When we boot the app up and the user has not clicked on anything, undefined will be returned
 - Redux does not allow us to return undefined and will throw an error
-- We have to set default state a null (above) 
-
-- Important to never muatate our current state to provide a new version of the state 
+- We have to set the **default state** as **null** (above) 
+- Important to **never mutate our current state** to provide a new version of the state 
 - The object that we return from our reducer should always be 100% fresh and clean 
 
 - Lastly, our reducer needs to be connected into the **combineReducers()** statement in src/reduers/index.js: 
@@ -293,7 +295,7 @@ const rootReducer = combineReducers({
 export default rootReducer;
 ```
 
-- Remember that any key (e.g. **activeBook**) that we provide to combineReducers() ends up as a key on our global state 
+- Remember that any key (e.g. **activeBook**) that we provide to **combineReducers()** ends up as a key on our **global state**
 
 _______________________________________________
 
