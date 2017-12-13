@@ -18,7 +18,7 @@ _______________________________________________
 #### 1. Create and export a reducer (we have to export in order to use it in other parts of our application)
 - reducer_books.js:
 
-```
+```javascript
 export default function() {
 	return [
 		{ title: 'Javascript: The Good Parts' }, 
@@ -31,7 +31,7 @@ export default function() {
 
 #### 2. Wire it to our Application 
 - index.js: 
-```
+```javascript
 import { combineReducers } from 'redux';
 import BooksReducer from './reducer_books'; 
 
@@ -69,15 +69,15 @@ _______________________________________________
 ### Containers - Implementation of a Container Class 
 
 - components/app.js: 
-```
+```javascript
 import React, { Component } from 'react';
-**import BookList from '../containers/book-list';**
+import BookList from '../containers/book-list';
 
 export default class App extends Component {
   render() {
     return (
       <div>
-      **<BookList />**
+      <BookList />
       </div>
     );
   }
