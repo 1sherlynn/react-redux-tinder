@@ -3,8 +3,15 @@ import { connect } from 'react-redux'; //Connect to store: STEP 1/3
 
 class BookDetail extends Component {
 	render() {
+		if (!this.props.book) {
+			return <div>Select a book to get started.</div>
+		}
 		return (
-			<div>Book Detail!</div>
+			<div>
+				<h3>Details for:</h3>
+				<div><b>Title: </b>{this.props.book.title}</div>
+				<div><b>Pages: </b>{this.props.book.pages}</div>
+			</div>
 			); 
 	}
 }

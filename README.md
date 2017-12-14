@@ -1,4 +1,4 @@
-# Redux (Udemy Stephen Grider)
+# Redux Part 1 (Udemy Stephen Grider)
 
 - **Redux** is the data contained in the application 
 - **React** is the views contained in the application 
@@ -344,14 +344,87 @@ _______________________________________________
 
 ### Conditional Rendering 
 
+- Because previously we connected state to props via the function mapStateToProps(state) { return { book: state.activeBook };}, we can now use **this.props.book** in **src/containers/book-detail.js** like so: 
 
+```javascript
+class BookDetail extends Component {
+	render() {
+		return (
+			<div>
+				<h3>Details for:</h3>
+				<div>{this.props.book.title}</div>
+			</div>
+			); 
+	}
+}
+```
 
+- Refreshing the browser shows an error: **Cannot read property 'title' of null at BookDetail**
+- Our application state is assembled entirely by all our reducers. 
+- When the app first starts up, user has not clicked on anything and state = null
+- When we use {this.props.book.title} we are calling null.title which throws an error because Redux expects some property to be defined 
+- Solution: Add intial check to the **render()** method: 
 
+```javascript
+class BookDetail extends Component {
+	render() {
+		if (!this.props.book) {
+			return <div>Select a book to get started.</div>
+		}
+		return (
+			<div>
+				<h3>Details for:</h3>
+				<div>{this.props.book.title}</div>
+			</div>
+			); 
+	}
+}
+```
 
+- Add a method to check if state = null and prompt the user to do an action 
+- Once the user clicks on a book, it will update our app state and cause the container to re-render and state will now be defined 
 
+_______________________________________________
 
+### Reducers and Actions Review
 
+- State in redux is a **single plain Javascript object**
+- Application state is **completely different** than a component state, not connected at all 
+- Component can still do stuff like this.state.something and this.setState({thing: 'thing'})
+- Application state is formed by reducers
+- Our Reducers all get tied together in src/reducers/index.js under the **combineReducers()** method: 
 
+```javascript
+import { combineReducers } from 'redux';
+import BooksReducer from './reducer_books'; 
+import ActiveBook from './reducer_active_book';
+
+const rootReducer = combineReducers({
+	books: BooksReducer,
+	activeBook: ActiveBook
+});
+
+export default rootReducer;
+
+```
+
+- For each **key** in our **combineReducers** object, we assign a reducer as its **value**, which is then rsponsible for creating a particular piece of state 
+- So in the above, whatever **ActiveBook (value)** returns will be available as our **activeBook (key)** piece of state
+- When an **action** is dispatched, it flows through **all** the different Reducers in our app and each Reducer has the option to return a different piece of state than usual based on the type of action that was received 
+- **Action Creators** are just simple functions that returns an **action**, and an action is just a **plain Javascript object**
+- e.g. src/actions/index.js: 
+```javascript 
+export function selectBook(book) {
+	// selectBook is an ActionCreator, it needs to return an action, an object with type property
+	return (an action) {
+		type: 'BOOK_SELECTED', 
+		//type is always in uppercase and usually a string
+		payload: book 
+		// piece of data that describes more information about the action undertaken 
+	}; 
+}
+```
+- An **action** must always have a **type** defined and they can have **payload** or any other properties 
 
 
 
