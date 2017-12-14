@@ -274,8 +274,7 @@ export default function(state = null, action) {
 - 'State' argument is **not** APPLICATION state, it refers only to the state that **this reducer** is responsible for 
 - All reducers get 2 arguments: **state** and **action** 
 ```javascript
-export default function(state = null, action) {
-}
+export default function(state = null, action) {...}
 ```
 - When we boot the app up and the user has not clicked on anything, undefined will be returned
 - Redux does not allow us to return undefined and will throw an error
@@ -305,7 +304,45 @@ _______________________________________________
 - Need to decide if we want to make a component or container (when we want to touch redux state directly)
 - Book Detail will care about the active book and hence it should be a container 
 
+- src/actions/index.js: 
+```javascript
+import React, { Component } from 'react'; 
+import { connect } from 'react-redux'; 
 
+class BookDetail extends Component {...}
+
+function mapStateToProps(state) {
+	return {
+		book: state.activeBook
+	}; 
+}
+
+export default connect(mapStateToProps)(BookDetail); 
+```
+
+- Connect to store: STEP 1/3: 
+```javascript
+import { connect } from 'react-redux'; 
+```
+- Connect to store: STEP 2/3:
+```javascript
+function mapStateToProps(state) {
+	return {
+		book: state.activeBook
+	}; 
+}
+```
+- Refer to reducers/index.js properties (in this case it is **activeBook**) to refer to the piece of state
+
+- Connect to store: STEP 3/3: 
+```javascript
+export default connect(mapStateToProps)(BookDetail); 
+```
+- Connect(function)(component) and it produces a container, which is aware of the state contained by redux 
+
+_______________________________________________
+
+### Conditional Rendering 
 
 
 
